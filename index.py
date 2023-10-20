@@ -18,11 +18,12 @@ AUTHORIZATION_HEADER = os.environ.get('GODADDY_AUTH_HEADER')
 @app.route('/check-domain', methods=['POST'])
 def check_domain():
     data = request.json
+    request_headers = data.get('headers', {})
     log_message = f"Received request to check domains: {data} | "
 
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': AUTHORIZATION_HEADER
+        'Authorization': request_headers.get("Authorization", AUTHORIZATION_HEADER)
     }
 
     try:
