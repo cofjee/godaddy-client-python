@@ -27,7 +27,8 @@ def check_domain():
     }
 
     try:
-        response = requests.post(GODADDY_URL + "/v1/domains/available?checkType=FAST", headers=headers, json=data)
+        domains = data.get('domains', [])
+        response = requests.post(GODADDY_URL + "/v1/domains/available?checkType=FAST", headers=headers, json=domains)
         log_message += GODADDY_URL
         log_message += f"Received response from GoDaddy API: {response.json()}"
         logger.info(log_message)
