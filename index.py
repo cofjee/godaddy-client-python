@@ -2,7 +2,10 @@ from flask import Flask, request, jsonify
 import requests
 import os
 
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)  # Enable CORS for the entire app
 
 GODADDY_URL = os.environ.get('GODADDY_API_URL', 'https://api.ote-godaddy.com')
 AUTHORIZATION_HEADER = os.environ.get('GODADDY_AUTH_HEADER')
